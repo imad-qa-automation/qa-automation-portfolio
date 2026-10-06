@@ -1,0 +1,21 @@
+
+[
+{
+    "nom": "Imad",
+    "email": "imad@test.com", 
+    "adresse" : {
+        "ville" : "Montréal",
+        "pays" : "Canada" 
+    }
+    
+},
+{
+    "nom": "Sara", 
+    "email":"sara@test.com",
+    "adresse" : {
+        "ville" : "Casa",
+        "pays" : "Maroc" 
+    }
+}
+
+]

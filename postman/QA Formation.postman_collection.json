@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "4b12e355-e9c1-411c-a1a6-56aa4ca83fb0",
+    "name": "QA Formation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42796029"
+  },
+  "item": [
+    {
+      "name": "Get User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r\n    pm.response.to.have.status (200);\r\n\r\n});\r\n\r\npm.test(\"Nom non vide\", function() {\r\n    const data = pm.response.json();\r\n    pm.expect(data.name).to.not.be.empty;\r\n});\r\n\r\npm.test(\"Email valide\", function(){\r\n    const data = pm.response.json();\r\n    pm.expect(data.email).to.include(\"@\");\r\n}\r\n)"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/users/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET tous les users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function() {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Liste non vide\", function() {\r\n    const data = pm.response.json();\r\n    pm.expect(data).to.be.an(\"array\");\r\n    pm.expect(data.length).to.be.above(0);\r\n});\r\n\r\npm.test(\"Premier user a un nom\", function() {\r\n    const data = pm.response.json();\r\n    pm.expect(data[0].name).to.not.be.empty;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/users",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET user inexistant",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 404\", function() {\r\n    pm.response.to.have.status(404);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/users/9999",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users",
+            "9999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "créer un user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 201\", function(){\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Nom correct\", function (){\r\n    const data = pm.response.json();\r\n    pm.expect(data.name).to.equal(\"Imad-Eddine\");\r\n});\r\n\r\npm.test(\"ID créé\", function() {\r\n    const data = pm.response.json();\r\n    pm.expect(data.id).to.exist;\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Imad-Eddine\",\r\n    \"email\": \"imad@test.com\",\r\n    \"username\": \"imad_qa\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/users",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
