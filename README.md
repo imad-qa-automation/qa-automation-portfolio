@@ -1,3 +1,5 @@
+![Tests](https://github.com/imad-qa-automation/qa-automation-portfolio/actions/workflows/tests.yml/badge.svg)
+
 # QA Automation Portfolio
 
 QA Automation Framework built with Python, Playwright, and Postman.
