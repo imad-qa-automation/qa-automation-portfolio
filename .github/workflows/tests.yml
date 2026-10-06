@@ -28,7 +28,7 @@ jobs:
         run: pytest tests/test_api.py -v
 
       - name: Upload report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: rapport-tests
-          path: rapports/
+            name: rapport-tests
+            path: rapports/
