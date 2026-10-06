@@ -1,0 +1,34 @@
+name: QA Automation Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-playwright pytest-html requests python-dotenv faker
+          playwright install chromium
+
+      - name: Run API tests
+        run: pytest tests/test_api.py -v
+
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: rapport-tests
+          path: rapports/
